@@ -12,7 +12,7 @@ def get_finger_states(hand_landmarks):
 
     # Other fingers 
     #for the other fingers we compare the y coordinates of the fingertip with the y coordinates of the joint two landmarks below it (tip - 2) to determine if the finger is open or closed
-    for tip in tips[1:]:
+    for tip in tips[1:]: #Loop through all fingertip IDs except the first one (starts from the index 1)
         if hand_landmarks.landmark[tip].y < hand_landmarks.landmark[tip - 2].y:
             fingers.append(1)
         else:
@@ -37,5 +37,9 @@ def detect_gesture(fingers):
     
     elif fingers == [1, 0, 0, 0, 0]:
         return "Thumbs Up"
+    elif fingers == [0, 1, 1, 1, 1]:
+        return "Four"
+    elif fingers == [1, 1, 0, 0, 1]:
+        return "Rock"
 
     return "Unknown"
